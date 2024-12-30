@@ -158,3 +158,9 @@ if st.session_state.predicted_dswr is not None:
 if st.session_state.all_combinations:
     st.markdown(f"**Stored Combinations Results:**")
     st.markdown(f"<span style='color:green;'>{', '.join(st.session_state.all_combinations)}</span>", unsafe_allow_html=True)
+
+# View Chart button
+if st.button("View Chart"):
+    st.markdown("### DSWR Chart")
+    sorted_data = data[["Day", "DSWR Number"]].iloc[::-1]  # Reverse the index order
+    st.dataframe(sorted_data.reset_index(drop=True))  # Reset the index to avoid displaying it
