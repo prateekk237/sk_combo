@@ -28,11 +28,12 @@ def scrape_dswr_numbers(start_month, start_year, end_month, end_year):
     while current_date <= end_date:
         month = current_date.month
         year = current_date.year
-        url = f"https://satta-king-fast.com/desawar/satta-result-chart/ds/?month={month}&year={year}"
+        month_name = current_date.strftime("%B")
+        url = f"https://satta-king-fast.com/chart.php?ResultFor={month_name}-{year}&month={month}&year={year}#mix-chart"
         print(f"Scraping URL: {url}")
         response = requests.get(url)
         if response.status_code != 200:
-            print(f"Failed to fetch data for {month}/{year}")
+            print(f"Failed to fetch data for {month_name} {year}")
             current_date = current_date.replace(day=28) + pd.Timedelta(days=4)
             current_date = current_date.replace(day=1)
             continue
